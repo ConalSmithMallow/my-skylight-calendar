@@ -12,26 +12,14 @@
 # 1. HELPERS (The Variables)
 input_text:
   # Filter Toggles (RegEx: .* = Show, ^$ = Hide)
-  alice_calendar_filter:
-    name: Alice Filter
+  conal_calendar_filter:
+    name: Conal Filter
     initial: ".*"
-  bob_calendar_filter:
-    name: Bob Filter
-    initial: ".*"
-  charlie_calendar_filter:
-    name: Charlie Filter
-    initial: ".*"
-  daisy_calendar_filter:
-    name: Daisy Filter
+  lorraine_calendar_filter:
+    name: Lorraine Filter
     initial: ".*"
   family_calendar_filter:
     name: Family Filter
-    initial: ".*"
-  birthdays_calendar_filter:
-    name: Birthdays Filter
-    initial: ".*"
-  holidays_calendar_filter:
-    name: Holidays Filter
     initial: ".*"
 
   # Event Form Data
@@ -47,10 +35,8 @@ input_select:
   calendar_select:
     name: Select Calendar
     options:
-      - Alice
-      - Bob
-      - Charlie
-      - Daisy
+      - Conal
+      - Lorraine
       - Family
     icon: mdi:calendar-check
   
@@ -91,45 +77,25 @@ input_boolean:
 # 2. SCRIPTS (The Logic)
 script:
   # --- Filter Toggles ---
-  alice_calendar_visible_filter:
-    alias: Toggle Alice Calendar
+  conal_calendar_visible_filter:
+    alias: Toggle Conal Calendar
     sequence:
       - action: input_text.set_value
         target:
-          entity_id: input_text.alice_calendar_filter
+          entity_id: input_text.conal_calendar_filter
         data:
           value: >
-            {% if is_state('input_text.alice_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
+            {% if is_state('input_text.conal_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
 
-  bob_calendar_visible_filter:
-    alias: Toggle Bob Calendar
+  lorraine_calendar_visible_filter:
+    alias: Toggle Lorraine Calendar
     sequence:
       - action: input_text.set_value
         target:
-          entity_id: input_text.bob_calendar_filter
+          entity_id: input_text.lorraine_calendar_filter
         data:
           value: >
-            {% if is_state('input_text.bob_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
-
-  charlie_calendar_visible_filter:
-    alias: Toggle Charlie Calendar
-    sequence:
-      - action: input_text.set_value
-        target:
-          entity_id: input_text.charlie_calendar_filter
-        data:
-          value: >
-            {% if is_state('input_text.charlie_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
-
-  daisy_calendar_visible_filter:
-    alias: Toggle Daisy Calendar
-    sequence:
-      - action: input_text.set_value
-        target:
-          entity_id: input_text.daisy_calendar_filter
-        data:
-          value: >
-            {% if is_state('input_text.daisy_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
+            {% if is_state('input_text.lorraine_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
 
   family_calendar_visible_filter:
     alias: Toggle Family Calendar
@@ -141,26 +107,6 @@ script:
           value: >
             {% if is_state('input_text.family_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
 
-  birthdays_calendar_visible_filter:
-    alias: Toggle Birthdays Calendar
-    sequence:
-      - action: input_text.set_value
-        target:
-          entity_id: input_text.birthdays_calendar_filter
-        data:
-          value: >
-            {% if is_state('input_text.birthdays_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
-
-  holidays_calendar_visible_filter:
-    alias: Toggle Holidays Calendar
-    sequence:
-      - action: input_text.set_value
-        target:
-          entity_id: input_text.holidays_calendar_filter
-        data:
-          value: >
-            {% if is_state('input_text.holidays_calendar_filter', '.*') %} ^$ {% else %} .* {% endif %}
-
   # --- Add Event Logic ---
   add_google_calendar_event:
     alias: Process Add Calendar Event
@@ -171,10 +117,8 @@ script:
           # Map the Dropdown Name (Left) to your Entity ID (Right).
           # ====================================================================
           calendar_map:
-            "Alice": "calendar.alice"
-            "Bob": "calendar.bob"
-            "Charlie": "calendar.charlie"
-            "Daisy": "calendar.daisy"
+            "Conal": "calendar.conaldavidsmith@gmail.com"
+            "Lorraine": "calendar.lorrainevsmith.23@gmail.com"
             "Family": "calendar.family"
           
           # Selects the entity based on the map above
@@ -223,4 +167,5 @@ script:
         data:
           value: ""
       - action: browser_mod.close_popup
+
         data: {}
